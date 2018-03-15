@@ -1,0 +1,7 @@
+D:\C#\Adventure\Adventure\obj\Debug\Adventure.csprojResolveAssemblyReference.cache
+D:\C#\Adventure\Adventure\obj\Debug\Adventure.csproj.CoreCompileInputs.cache
+D:\C#\Adventure\Adventure\bin\Debug\Adventure.exe.config
+D:\C#\Adventure\Adventure\bin\Debug\Adventure.exe
+D:\C#\Adventure\Adventure\bin\Debug\Adventure.pdb
+D:\C#\Adventure\Adventure\obj\Debug\Adventure.exe
+D:\C#\Adventure\Adventure\obj\Debug\Adventure.pdb
