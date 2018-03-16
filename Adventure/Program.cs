@@ -25,24 +25,23 @@ namespace Adventure
 
         public static void StartGame()
         {
-            Console.Title = "Adventure Game";
-            Console.WriteLine("Matt's Adventure Game!");
-            Dialog("Welcome to the magical realm of Daz!");
-            NameCharacter();
-        }
-        
-        static void NameCharacter()
-        {
-            Dialog("What is your name, traveler? ");
-            charName = Console.ReadLine();
-            Dialog("Dare you enter my magical realm, " + charName + "?");
+            Console.Title = "Text Adventure";
+            Console.WriteLine("(Type \"F\" to turn your flashlight on) ");
+            while (Console.ReadLine().ToUpper() != "F")
+                Dialog("(Type \"F\" to turn your flashlight on) ", "w");
+            Dialog("You breathe a sigh of relief as a beam of light cuts through the darkness.\n" +
+                "Tonight's desperate plan will be hard enough as it is, but it would be just\n" +
+                "your luck if something went wrong right out of the gate.", "w");
+            Dialog("\"Hey Frankie, did you see something over there?\"", "red");
+            Dialog("Shit.", "w");
         }
 
-        static void Dialog(string message)
+        static void Cont()
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine(message);
-            Console.ResetColor();
+            Console.WriteLine("\nPress the spacebar to continue...");
+            while (Console.ReadKey().Key != ConsoleKey.Spacebar)
+                continue;
+            Console.Clear();
         }
 
         static void Dialog(string message, string color)
@@ -58,6 +57,22 @@ namespace Adventure
 
             Console.WriteLine(message);
             Console.ResetColor();
+            Cont();
+        }
+
+        static void Choice()
+        {
+            string input = "";
+            Console.WriteLine(charName + ", which will you choose? A or B?");
+            input = Console.ReadLine().ToUpper();
+            if (input == "A")
+            {
+                Console.WriteLine("You've chosen path A!");
+            }
+            else
+            {
+                Console.WriteLine("You've chosen path B!");
+            }
         }
     }
 
