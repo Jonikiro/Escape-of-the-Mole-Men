@@ -14,7 +14,7 @@ namespace Adventure
     {
         static void Main()
         {
-            Game.StartGame();
+            Game.Introduction();
             Console.ReadKey();
         }
     }
@@ -23,12 +23,16 @@ namespace Adventure
     {
         static string charName = "John Doe";
 
-        public static void StartGame()
+        public static void Introduction()
         {
             Console.Title = "Text Adventure";
-            Console.WriteLine("(Type \"F\" to turn your flashlight on) ");
-            while (Console.ReadLine().ToUpper() != "F")
-                Dialog("(Type \"F\" to turn your flashlight on) ", "w");
+            Console.WriteLine("(Type \"LIGHT\" to turn your flashlight on) ");
+            while (Console.ReadLine().ToUpper() != "LIGHT")
+            {
+                Console.Clear();
+                Console.WriteLine("(Type \"LIGHT\" to turn your flashlight on) ", "w");
+            }
+            Console.Clear();
             Dialog("You breathe a sigh of relief as a beam of light cuts through the darkness.\n" +
                 "Tonight's desperate plan will be hard enough as it is, but it would be just\n" +
                 "your luck if something went wrong right out of the gate.", "w");
