@@ -1,4 +1,3 @@
-D:\C#\Adventure\Adventure\obj\Debug\Adventure.csprojResolveAssemblyReference.cache
 D:\C#\Adventure\Adventure\obj\Debug\Adventure.csproj.CoreCompileInputs.cache
 D:\C#\Adventure\Adventure\bin\Debug\Adventure.exe.config
 D:\C#\Adventure\Adventure\bin\Debug\Adventure.exe

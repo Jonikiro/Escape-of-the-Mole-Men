@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Adventure
 {
-    public static class Game
+    public static class Intro
     {
-        static string charName = "John Doe";
-
-        public static void Intro()
+        public static void IntroMain()
         {
-            //
-            Console.Title = "Text Adventure";
+            //Sets the window title to name of the game.
+            Console.Title = "Escape of the Mole Men";
+
+            //Initiates first action of the game
             Console.WriteLine("(Type \"LIGHT\" to turn your flashlight on) ");
             while (Console.ReadLine().ToUpper() != "LIGHT")
             {
@@ -21,50 +21,15 @@ namespace Adventure
                 Console.WriteLine("(Type \"LIGHT\" to turn your flashlight on) ", "w");
             }
             Console.Clear();
-            Dialog("You breathe a sigh of relief as a beam of light cuts through the darkness.\n" +
+
+            //Dialog 1
+            Program.Dialog("You breathe a sigh of relief as a beam of light cuts through the darkness.\n" +
                 "Tonight's desperate plan will be hard enough as it is, but it would be just\n" +
                 "your luck if something went wrong right out of the gate.", "w");
-            Dialog("\"Hey Frankie, did you see something over there?\"", "red");
-            Dialog("Shit.", "w");
-        }
+            Program.Dialog("\"Hey Frankie, did you see something over there?\"", "red");
+            Program.Dialog("Shit.", "w");
 
-        static void Cont()
-        {
-            Console.WriteLine("\nPress the spacebar to continue...");
-            while (Console.ReadKey().Key != ConsoleKey.Spacebar)
-                continue;
-            Console.Clear();
-        }
 
-        static void Dialog(string message, string color)
-        {
-            if (color == "red")
-            { Console.ForegroundColor = ConsoleColor.Red; }
-            else if (color == "green")
-            { Console.ForegroundColor = ConsoleColor.Green; }
-            else if (color == "yellow")
-            { Console.ForegroundColor = ConsoleColor.Yellow; }
-            else
-            { Console.ForegroundColor = ConsoleColor.White; }
-
-            Console.WriteLine(message);
-            Console.ResetColor();
-            Cont();
-        }
-
-        static void Choice()
-        {
-            string input = "";
-            Console.WriteLine(charName + ", which will you choose? A or B?");
-            input = Console.ReadLine().ToUpper();
-            if (input == "A")
-            {
-                Console.WriteLine("You've chosen path A!");
-            }
-            else
-            {
-                Console.WriteLine("You've chosen path B!");
-            }
         }
     }
 }

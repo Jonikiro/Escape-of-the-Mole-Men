@@ -2,7 +2,7 @@
 * Development began March 15, 2018
 *
 * This work is a derivative of
-* "C# Adventure Game" by http://programmingisfun.com, used under CC BY.
+* "C# Adventure Game" by http://Progammingisfun.com, used under CC BY.
 * https://creativecommons.org/licenses/by/4.0/
 */
 
@@ -19,8 +19,34 @@ namespace Adventure
         //Main game loop
         static void Main()
         {
-            Game.Intro();
+            Intro.IntroMain();
             Console.ReadKey();
+        }
+
+        //Allows the user to continue at their own pace.
+        public static void Cont()
+        {
+            Console.WriteLine("\nPress the spacebar to continue...");
+            while (Console.ReadKey().Key != ConsoleKey.Spacebar)
+                continue;
+            Console.Clear();
+        }
+
+        //Allows for customizable text to differentiate actors.
+        public static void Dialog(string message, string color)
+        {
+            if (color == "red")
+            { Console.ForegroundColor = ConsoleColor.Red; }
+            else if (color == "green")
+            { Console.ForegroundColor = ConsoleColor.Green; }
+            else if (color == "yellow")
+            { Console.ForegroundColor = ConsoleColor.Yellow; }
+            else
+            { Console.ForegroundColor = ConsoleColor.White; }
+
+            Console.WriteLine(message);
+            Console.ResetColor();
+            Cont();
         }
     }
 }
