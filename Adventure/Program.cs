@@ -14,7 +14,7 @@ namespace Adventure
     {
         static void Main()
         {
-            Game.Introduction();
+            Game.Intro();
             Console.ReadKey();
         }
     }
@@ -23,8 +23,9 @@ namespace Adventure
     {
         static string charName = "John Doe";
 
-        public static void Introduction()
+        public static void Intro()
         {
+            //
             Console.Title = "Text Adventure";
             Console.WriteLine("(Type \"LIGHT\" to turn your flashlight on) ");
             while (Console.ReadLine().ToUpper() != "LIGHT")
