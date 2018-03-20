@@ -51,6 +51,7 @@ namespace Adventure
             Cont();
         }
 
+        // Code for user input and response
         public static void Action(string message, string action)
         {
             Console.ForegroundColor = ConsoleColor.White;
