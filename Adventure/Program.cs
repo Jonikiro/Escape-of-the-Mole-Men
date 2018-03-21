@@ -32,23 +32,39 @@ namespace Adventure
             Console.Clear();
         }
 
-        // Allows for customizable text to differentiate actors.
-        public static void Dialog(string message, string color)
+        // Allows for customizable text
+        public static void CustomText(string message, string color)
         {
-            if (color == "red")
-            { Console.ForegroundColor = ConsoleColor.Red; }
-            else if (color == "green")
-            { Console.ForegroundColor = ConsoleColor.Green; }
-            else if (color == "yellow")
-            { Console.ForegroundColor = ConsoleColor.Yellow; }
-            else if (color == "purple")
-            { Console.ForegroundColor = ConsoleColor.Magenta; }
-            else
-            { Console.ForegroundColor = ConsoleColor.White; }
+            switch (color)
+            {
+                case "r":
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    break;
+                case "g":
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    break;
+                case "b":
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    break;
+                case "y":
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    break;
+                case "p":
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    break;
+                case "w":
+                    Console.ForegroundColor = ConsoleColor.White;
+                    break;
+                case "x":
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    break;
+                default:
+                    Console.ResetColor();
+                    break;
+            }
 
-            Console.WriteLine(message);
+            Console.Write(message);
             Console.ResetColor();
-            Cont();
         }
 
         // Code for user input and response
