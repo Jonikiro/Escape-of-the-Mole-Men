@@ -23,15 +23,16 @@ namespace Adventure
             // Sets the window title to name of the game.
             Console.Title = "Escape of the Mole Men";
 
-            //Initiates main menu
+            // Initiates main menu
             MainMenu();
 
             Console.ReadKey();
         }
 
-        //Main Menu Functionality
+        // Main Menu Functionality
         public static void MainMenu()
         {
+            // Main Menu Dialog
             while (true)
             {
                 Console.Clear();
@@ -41,8 +42,10 @@ namespace Adventure
                    "\n2. Continue\n\n" +
                    "Type a number to make your decision: ");
 
+                // Saves choice as string variable, normalizes content
                 string gameChoice = Console.ReadLine().Replace(" ", "");
 
+                // Starts new game or loads up recent checkpoint using code from Save.txt
                 if (gameChoice == "1")
                 {
                     Console.Clear();
@@ -65,17 +68,29 @@ namespace Adventure
         // Allows the user to continue at their own pace.
         public static void Cont()
         {
-            Console.WriteLine("\nPress the spacebar to continue...");
+            Console.WriteLine("\n\nPress the spacebar to continue...");
             while (Console.ReadKey().Key != ConsoleKey.Spacebar)
                 continue;
             Console.Clear();
         }
 
         // Allows for customizable text
-        public static void CustomText(string message, string color)
+        public static void Dialog(string message, string color)
         {
             switch (color)
             {
+                case "dr":
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    break;
+                case "dg":
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    break;
+                case "db":
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    break;
+                case "dy":
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    break;
                 case "r":
                     Console.ForegroundColor = ConsoleColor.Red;
                     break;
@@ -110,19 +125,21 @@ namespace Adventure
         }
 
         // Code for user input and response
-        public static void Action(string message, string action)
+        public static string Action(string message, string[] action)
         {
+            string choice;
+
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write(message);
+            choice = Console.ReadLine().ToUpper().Replace(" ", "");
 
-            while (Console.ReadLine().ToUpper().Replace(" ", "") != action)
-            {
-                Console.Clear();
-                Console.Write(message);
-            }
+            if (!action.Contains(choice))
+                return "NULL";
 
             Console.Clear();
             Console.ResetColor();
+
+            return choice;
         }
 
         // Creates new checkpoint
@@ -132,7 +149,7 @@ namespace Adventure
         }
 
         // Reads checkpoint code from save file and loads respective scene
-        public static void Load(string path)
+        private static void Load(string path)
         {
             string code = File.ReadAllText(@path);
 
