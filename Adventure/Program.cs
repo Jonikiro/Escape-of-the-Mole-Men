@@ -125,17 +125,18 @@ namespace Adventure
             Console.ResetColor();
         }
 
-        //Creates new checkpoint
+        // Creates new checkpoint
         public static void Save(string code)
         {
             File.WriteAllText(@"D:\C#\Adventure\Adventure\Save.txt", code);
         }
 
-        //Reads checkpoint code from save file and loads respective scene
+        // Reads checkpoint code from save file and loads respective scene
         public static void Load(string path)
         {
             string code = File.ReadAllText(@path);
 
+            // Switch statement contains "table of contents" for story to load from
             switch (code)
             {
                 case "1":
