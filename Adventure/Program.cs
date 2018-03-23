@@ -52,7 +52,6 @@ namespace Adventure
                 else if (gameChoice == "2")
                 {
                     Console.Clear();
-                    Save("This is going to work");
                     Load(@"D:\C#\Adventure\Adventure\Save.txt");
                     break;
                 }
@@ -132,10 +131,20 @@ namespace Adventure
             File.WriteAllText(@"D:\C#\Adventure\Adventure\Save.txt", code);
         }
 
+        //Reads checkpoint code from save file and loads respective scene
         public static void Load(string path)
         {
             string code = File.ReadAllText(@path);
-            Console.WriteLine(code);
+
+            switch (code)
+            {
+                case "1":
+                    Intro.IntroMain();
+                    break;
+                case "2":
+                    Intro.IntroPart2();
+                    break;
+            }
         }
     }
 }

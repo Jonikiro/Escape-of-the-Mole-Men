@@ -10,9 +10,16 @@ namespace Adventure
     {
         public static void IntroMain()
         {
+            Program.Save("1");
+            Console.WriteLine("This is the start of the story.");
+            Program.Save("2");
+            Program.Cont();
+            IntroPart2();
+        }
 
-
-
+        public static void IntroPart2()
+        {
+            Console.WriteLine("This is the middle.");
         }
     }
 }
