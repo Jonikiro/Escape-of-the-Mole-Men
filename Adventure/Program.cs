@@ -19,6 +19,14 @@ namespace Adventure
         // Main game loop
         static void Main()
         {
+            MainMenu();
+
+            Console.ReadKey();
+        }
+
+        //Main Menu Functionality
+        public static void MainMenu()
+        {
             while (true)
             {
                 Console.Clear();
@@ -48,8 +56,6 @@ namespace Adventure
                     continue;
                 }
             }
-
-            Console.ReadKey();
         }
 
         // Allows the user to continue at their own pace.
