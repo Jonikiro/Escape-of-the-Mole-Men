@@ -19,7 +19,36 @@ namespace Adventure
         // Main game loop
         static void Main()
         {
-            Intro.IntroMain();
+            while (true)
+            {
+                Console.Clear();
+                Console.Write("Welcome to \"Escape of the Mole Men.\"" +
+                   "\nWould you like to start a new game or continue from a previous save?\n" +
+                   "\n1. New Game" +
+                   "\n2. Continue\n\n" +
+                   "Type a number to make your decision: ");
+
+                string gameChoice = Console.ReadLine().Replace(" ", "");
+
+                if (gameChoice == "1")
+                {
+                    Console.Clear();
+                    Console.WriteLine("Good for youuu.");
+                    //Intro.IntroMain();
+                    break;
+                }
+                else if (gameChoice == "2")
+                {
+                    Console.Clear();
+                    Console.WriteLine("Here we gooo.");
+                    break;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+
             Console.ReadKey();
         }
 
@@ -72,13 +101,20 @@ namespace Adventure
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write(message);
+
             while (Console.ReadLine().ToUpper().Replace(" ", "") != action)
             {
                 Console.Clear();
                 Console.Write(message);
             }
+
             Console.Clear();
             Console.ResetColor();
+        }
+
+        public static void Save()
+        {
+
         }
     }
 }

@@ -12,6 +12,8 @@ namespace Adventure
         {
             // Sets the window title to name of the game.
             Console.Title = "Escape of the Mole Men";
+
+
         }
     }
 }
