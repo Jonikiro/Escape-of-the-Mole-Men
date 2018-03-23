@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Adventure
 {
@@ -19,6 +20,10 @@ namespace Adventure
         // Main game loop
         static void Main()
         {
+            // Sets the window title to name of the game.
+            Console.Title = "Escape of the Mole Men";
+
+            //Initiates main menu
             MainMenu();
 
             Console.ReadKey();
@@ -41,14 +46,14 @@ namespace Adventure
                 if (gameChoice == "1")
                 {
                     Console.Clear();
-                    Console.WriteLine("Good for youuu.");
-                    //Intro.IntroMain();
+                    Intro.IntroMain();
                     break;
                 }
                 else if (gameChoice == "2")
                 {
                     Console.Clear();
-                    Console.WriteLine("Here we gooo.");
+                    Save("This is going to work");
+                    Load(@"D:\C#\Adventure\Adventure\Save.txt");
                     break;
                 }
                 else
@@ -87,6 +92,9 @@ namespace Adventure
                 case "p":
                     Console.ForegroundColor = ConsoleColor.Magenta;
                     break;
+                case "c":
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    break;
                 case "w":
                     Console.ForegroundColor = ConsoleColor.White;
                     break;
@@ -118,9 +126,16 @@ namespace Adventure
             Console.ResetColor();
         }
 
-        public static void Save()
+        //Creates new checkpoint
+        public static void Save(string code)
         {
+            File.WriteAllText(@"D:\C#\Adventure\Adventure\Save.txt", code);
+        }
 
+        public static void Load(string path)
+        {
+            string code = File.ReadAllText(@path);
+            Console.WriteLine(code);
         }
     }
 }

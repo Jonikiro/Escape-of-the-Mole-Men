@@ -10,8 +10,7 @@ namespace Adventure
     {
         public static void IntroMain()
         {
-            // Sets the window title to name of the game.
-            Console.Title = "Escape of the Mole Men";
+
 
 
         }
