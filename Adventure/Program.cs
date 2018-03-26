@@ -23,15 +23,16 @@ namespace Adventure
             // Sets the window title to name of the game.
             Console.Title = "Escape of the Mole Men";
 
-            //Initiates main menu
+            // Initiates main menu
             MainMenu();
 
             Console.ReadKey();
         }
 
-        //Main Menu Functionality
+        // Main Menu Functionality
         public static void MainMenu()
         {
+            // Main Menu Dialog
             while (true)
             {
                 Console.Clear();
@@ -41,8 +42,10 @@ namespace Adventure
                    "\n2. Continue\n\n" +
                    "Type a number to make your decision: ");
 
+                // Saves choice as string variable, normalizes content
                 string gameChoice = Console.ReadLine().Replace(" ", "");
 
+                // Starts new game or loads up recent checkpoint using code from Save.txt
                 if (gameChoice == "1")
                 {
                     Console.Clear();
@@ -52,7 +55,6 @@ namespace Adventure
                 else if (gameChoice == "2")
                 {
                     Console.Clear();
-                    Save("This is going to work");
                     Load(@"D:\C#\Adventure\Adventure\Save.txt");
                     break;
                 }
@@ -66,17 +68,29 @@ namespace Adventure
         // Allows the user to continue at their own pace.
         public static void Cont()
         {
-            Console.WriteLine("\nPress the spacebar to continue...");
+            Console.WriteLine("\n\nPress the spacebar to continue...");
             while (Console.ReadKey().Key != ConsoleKey.Spacebar)
                 continue;
             Console.Clear();
         }
 
         // Allows for customizable text
-        public static void CustomText(string message, string color)
+        public static void Dialog(string message, string color)
         {
             switch (color)
             {
+                case "dr":
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    break;
+                case "dg":
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    break;
+                case "db":
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    break;
+                case "dy":
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    break;
                 case "r":
                     Console.ForegroundColor = ConsoleColor.Red;
                     break;
@@ -111,31 +125,44 @@ namespace Adventure
         }
 
         // Code for user input and response
-        public static void Action(string message, string action)
+        public static string Action(string message, string[] action)
         {
+            string choice;
+
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write(message);
+            choice = Console.ReadLine().ToUpper().Replace(" ", "");
 
-            while (Console.ReadLine().ToUpper().Replace(" ", "") != action)
-            {
-                Console.Clear();
-                Console.Write(message);
-            }
+            if (!action.Contains(choice))
+                return "NULL";
 
             Console.Clear();
             Console.ResetColor();
+
+            return choice;
         }
 
-        //Creates new checkpoint
+        // Creates new checkpoint
         public static void Save(string code)
         {
             File.WriteAllText(@"D:\C#\Adventure\Adventure\Save.txt", code);
         }
 
-        public static void Load(string path)
+        // Reads checkpoint code from save file and loads respective scene
+        private static void Load(string path)
         {
             string code = File.ReadAllText(@path);
-            Console.WriteLine(code);
+
+            // Switch statement contains "table of contents" for story to load from
+            switch (code)
+            {
+                case "1":
+                    Intro.IntroMain();
+                    break;
+                case "2":
+                    Intro.IntroPart2();
+                    break;
+            }
         }
     }
 }
