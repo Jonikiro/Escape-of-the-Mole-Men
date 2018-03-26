@@ -8,33 +8,39 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using System.IO;
 
 namespace Adventure
 {
     class Program
     {
-        // Main game loop
+        // Program game loop
         static void Main()
         {
             // Sets the window title to name of the game.
+            Sheets.DB(Sheets.Scopes);
             Console.Title = "Escape of the Mole Men";
 
-            // Initiates main menu
+            // Initiates Program menu
             MainMenu();
 
             Console.ReadKey();
         }
 
-        // Main Menu Functionality
+        // Program Menu Functionality
         public static void MainMenu()
         {
-            // Main Menu Dialog
+            // Program Menu Dialog
             while (true)
             {
+                // Checks state of save file
+                FileInfo f = new FileInfo(@"D:\C#\Adventure\Adventure\Save.txt");
+                long s1 = f.Length;
+
                 Console.Clear();
                 Console.Write("Welcome to \"Escape of the Mole Men.\"" +
                    "\nWould you like to start a new game or continue from a previous save?\n" +
@@ -52,15 +58,17 @@ namespace Adventure
                     Intro.IntroMain();
                     break;
                 }
-                else if (gameChoice == "2")
+                else if (gameChoice == "2" && s1 != 0)
                 {
                     Console.Clear();
                     Load(@"D:\C#\Adventure\Adventure\Save.txt");
                     break;
                 }
-                else
+                else if (gameChoice == "2" && s1 == 0)
                 {
-                    continue;
+                    Console.Clear();
+                    Console.WriteLine("No saved game currently exists.");
+                    Cont();
                 }
             }
         }
@@ -161,6 +169,8 @@ namespace Adventure
                     break;
                 case "2":
                     Intro.IntroPart2();
+                    break;
+                default:
                     break;
             }
         }
