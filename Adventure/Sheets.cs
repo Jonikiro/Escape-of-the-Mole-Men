@@ -49,22 +49,17 @@ namespace Adventure
             // *******************************************************************
 
             // Relevant code for updating database
+            String spreadsheetId = "1tFetfWWxEfTCuJHFySu6t8syozdTF0q4GEpbfaFQSgc";
+            String range = "Sheet1!A1:F5";
+            ValueRange valueRange = new ValueRange { };
 
+            var oblist = new List<object>() { Environment.MachineName, "Test" };
+            var oblist2 = new List<object>() { Environment.MachineName, "Test2" };
+            valueRange.Values = new List<IList<object>> { oblist, oblist2 };
 
-
-            //String spreadsheetId = "1tFetfWWxEfTCuJHFySu6t8syozdTF0q4GEpbfaFQSgc";
-            //String range = "Sheet1!F5";
-            //ValueRange valueRange = new ValueRange
-            //{
-            //    MajorDimension = "COLUMNS"
-            //};
-
-            //var oblist = new List<object>() {Environment.MachineName};
-            //valueRange.Values = new List<IList<object>> { oblist };
-
-            ////SpreadsheetsResource.ValuesResource.UpdateRequest update = service.Spreadsheets.Values.Update(valueRange, spreadsheetId, range);
-            ////update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
-            ////UpdateValuesResponse result2 = update.Execute();
+            SpreadsheetsResource.ValuesResource.UpdateRequest update = service.Spreadsheets.Values.Update(valueRange, spreadsheetId, range);
+            update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+            UpdateValuesResponse result2 = update.Execute();
         }
     }
 }
