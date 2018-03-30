@@ -3,6 +3,7 @@ using Google.Apis.Sheets.v4;
 using Google.Apis.Sheets.v4.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Data = Google.Apis.Sheets.v4.Data;
+
 
 
 namespace Adventure
@@ -50,12 +53,16 @@ namespace Adventure
 
             // Relevant code for updating database
             String spreadsheetId = "1tFetfWWxEfTCuJHFySu6t8syozdTF0q4GEpbfaFQSgc";
-            String range = "Sheet1!A1:F5";
-            ValueRange valueRange = new ValueRange { };
+            String range = "Sheet1!A:A";
+            ValueRange valueRange = new ValueRange { MajorDimension = "COLUMNS" };
 
-            var oblist = new List<object>() { Environment.MachineName, "Test" };
-            var oblist2 = new List<object>() { Environment.MachineName, "Test2" };
-            valueRange.Values = new List<IList<object>> { oblist, oblist2 };
+            var oblist = new List<object>() { Environment.MachineName };
+            // var oblist = new List<object>();
+            oblist.Add("TestUlt");
+            valueRange.Values = new List<IList<object>> { oblist };
+            SpreadsheetsResource.ValuesResource.GetRequest request = service.Spreadsheets.Values.Get(spreadsheetId, range);
+            Data.ValueRange response = request.Execute();
+            
 
             SpreadsheetsResource.ValuesResource.UpdateRequest update = service.Spreadsheets.Values.Update(valueRange, spreadsheetId, range);
             update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
