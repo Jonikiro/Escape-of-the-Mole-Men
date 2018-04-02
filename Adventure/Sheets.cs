@@ -26,9 +26,10 @@ namespace Adventure
 
         public static void DB(string[] args)
         {
+            // *******************************************************************
             // Template code for initial setup
             // *******************************************************************
-            
+
             // API code used to generate an access token for current user.
             UserCredential credential;
 
@@ -49,28 +50,50 @@ namespace Adventure
             }
 
             // Create Google Sheets API service.
+            // "var" can be used when storing a reference to an object of an anonymous type, 
+            // which can't be known in advance. Normally, it just lets the compiler infer the data type.
             var service = new SheetsService(new BaseClientService.Initializer()
             {
                 HttpClientInitializer = credential,
                 ApplicationName = ApplicationName
             });
+
+            // *******************************************************************
+            // Relevant code for updating database
             // *******************************************************************
 
-            // Relevant code for updating database
+            // These are the variables each API method needs to operate
             String spreadsheetId = "1tFetfWWxEfTCuJHFySu6t8syozdTF0q4GEpbfaFQSgc";
-            String range = "Sheet1!A:A";
+            String range = "Sheet1!A:C";
+            // Curly braces allow you to specify property parameters on initialization
+            // Object initializers like this let you set properties after construction, but before use.
+            // Apparently you can omit parentheses when creating a new object!
             ValueRange valueRange = new ValueRange { MajorDimension = "COLUMNS" };
 
-            var oblist = new List<object>() { Environment.MachineName };
-            // var oblist = new List<object>();
-            oblist.Add("TestUlt");
-            valueRange.Values = new List<IList<object>> { oblist };
-            SpreadsheetsResource.ValuesResource.GetRequest request = service.Spreadsheets.Values.Get(spreadsheetId, range);
-            Data.ValueRange response = request.Execute();
+            // This is the list of values which will be inserted into the table.
+            // The ValueRange object takes 2D lists, in which the inner list is the cell by cell data
+            // and the outer list is each row/column (depending on which MajorDimension is indicated).
+            // Object is used as a data type that can accept any values!
+            var oblist = new List<object>() { Environment.MachineName, "fuck", "duck", "truck" };
+            var oblist2 = new List<object>() { Environment.MachineName + " special", "suck", "muck", "luck" };
+            var oblist3 = new List<object>() { "TestUlt", "Test", "test", "Test" };
+
+            // This particular list is the outer list. It contains all the lists of data from before, one per dimension.
+            valueRange.Values = new List<IList<object>> { oblist, oblist2, oblist3 };
             
+            // The following code pushes data to the spreadsheet.
             SpreadsheetsResource.ValuesResource.UpdateRequest update = service.Spreadsheets.Values.Update(valueRange, spreadsheetId, range);
             update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
             UpdateValuesResponse result2 = update.Execute();
+
+            // The following code pulls data from the spreadsheet.
+            SpreadsheetsResource.ValuesResource.GetRequest request = service.Spreadsheets.Values.Get(spreadsheetId, range);
+            ValueRange response = request.Execute();
+            IList<IList<Object>> values = response.Values;
+            Console.WriteLine(values[1][1]);
+            Console.Read();
+
+            // *******************************************************************
         }
     }
 }
