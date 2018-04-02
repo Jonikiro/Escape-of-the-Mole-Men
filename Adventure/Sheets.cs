@@ -28,12 +28,17 @@ namespace Adventure
         {
             // Template code for initial setup
             // *******************************************************************
+            
+            // API code used to generate an access token for current user.
             UserCredential credential;
 
+            // Using statement essentially releases FileStream object once it is no longer needed.
+            // This code opens the credential file this API just set up previously.
             using (var stream = new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
             {
                 string credPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
 
+                // Opens client-side browser to authenticate end-user with their google account.
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.Load(stream).Secrets,
                     Scopes,
@@ -63,7 +68,6 @@ namespace Adventure
             SpreadsheetsResource.ValuesResource.GetRequest request = service.Spreadsheets.Values.Get(spreadsheetId, range);
             Data.ValueRange response = request.Execute();
             
-
             SpreadsheetsResource.ValuesResource.UpdateRequest update = service.Spreadsheets.Values.Update(valueRange, spreadsheetId, range);
             update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
             UpdateValuesResponse result2 = update.Execute();
