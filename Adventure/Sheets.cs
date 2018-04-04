@@ -81,7 +81,7 @@ namespace Adventure
             // This particular list is the outer list. It contains all the lists of data from before, one per dimension.
             valueRange.Values = new List<IList<object>> { oblist, oblist2, oblist3 };
             
-            // The following code pushes data to the spreadsheet.
+            // Creates an UpdateRequest object with an ID, range, and content. Adjusts input option then executes the write command.
             SpreadsheetsResource.ValuesResource.UpdateRequest update = service.Spreadsheets.Values.Update(valueRange, spreadsheetId, range);
             update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
             UpdateValuesResponse result2 = update.Execute();
@@ -91,7 +91,7 @@ namespace Adventure
             ValueRange response = request.Execute();
             IList<IList<Object>> values = response.Values;
             Console.WriteLine(values[1][1]);
-            Console.Read();
+            Console.ReadKey();
 
             // *******************************************************************
         }
