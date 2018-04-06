@@ -18,13 +18,14 @@ namespace Adventure
 {
     class Program
     {
+        // Path for the save game file set up as a field for use within the class
         private static string path = @"D:\C#\Adventure\Adventure\Save.txt";
         // Program game loop
         static void Main()
         {
+            // Sheets.DB(Sheets.Scopes);
+
             // Sets the window title to name of the game.
-            Console.WriteLine(path);
-            Sheets.DB(Sheets.Scopes);
             Console.Title = "Escape of the Mole Men";
 
             // Initiates Program menu
@@ -58,6 +59,7 @@ namespace Adventure
                 {
                     Console.Clear();
                     File.WriteAllText(path, String.Empty);
+                    Program.Save("1");
                     Intro.IntroMain();
                     break;
                 }
@@ -156,13 +158,13 @@ namespace Adventure
         // Creates new checkpoint
         public static void Save(string code)
         {
-            File.AppendAllText(path, code);
+            File.AppendAllText(path, code + Environment.NewLine);
         }
 
         // Reads checkpoint code from save file and loads respective scene
         private static void Load(string path)
         {
-            string code = File.ReadAllText(@path);
+            string code = File.ReadAllLines(@path).Last();
 
             // Switch statement contains "table of contents" for story to load from
             switch (code)

@@ -10,8 +10,8 @@ namespace Adventure
     {
         public static void IntroMain()
         {
-            Program.Save("1");
             string introChoice;
+            string choiceCode;
 
             // Dialog
             Program.Dialog("\"Quiet...\"", "dg");
@@ -29,31 +29,43 @@ namespace Adventure
             // Choice
             string[] introDialog1 = { "1", "2", "3" };
 
-            do
+            while (true)
             {
                 Console.Clear();
                 Program.Dialog("You turn to him and whisper:\n\n", "w");
                 Program.Dialog("1. We should check it out.\n", "y");
-                Program.Dialog("2. What do you think it is?\n", "w");
-                Program.Dialog("3. Where do you think it's coming from?\n", "w");
+                Program.Dialog("2. Let's keep going.\n", "y");
+                Program.Dialog("3. What do you think it is?", "w");
                 introChoice = Program.Action("\nChoose a dialog option: ", introDialog1);
 
-                if (introChoice == "2")
+                if (introChoice == "3")
                 {
-                    Program.Dialog("I can't quite make it out. What's your take?", "w");
+                    Program.Dialog("I didn't see anything strange along the way. What do you think it is?", "w");
                     Program.Cont();
+                    Program.Dialog("Can't say. You sure we weren't followed? We can't risk leading anyone\n" +
+                        "back to our hideout. Not like last time.", "dg");
+                    Program.Cont();
+                    continue;
                 }
-                else if (introChoice == "3")
+                else if (introChoice == "1" || introChoice == "2")
                 {
-                    Program.Dialog("I didn't see anything weird on our way here. Where do you think it is?", "w");
-                    Program.Cont();
+                    break;
                 }
+            }
 
-            } while (introChoice != "1");
-
-            Program.Dialog("Whatever it is, we need to take care of it now so it doesn't\n" +
+            if (introChoice == "1")
+            {
+                Program.Dialog("Whatever it is, we need to take care of it now so it doesn't\n" +
                 "follow us home. Let's go.", "w");
-            Program.Cont();
+                Program.Save("1");
+                Program.Cont();
+            }
+            else
+            {
+                Program.Dialog("Forget it, let's just get back home already.", "w");
+                Program.Save("2");
+                Program.Cont();
+            }
 
             Program.Save("2");
             IntroPart2();
