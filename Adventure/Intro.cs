@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Adventure
 {
     public static class Intro
     {
+        // Path for the save game file set up as a field for use within the class
+        private static string path = @"D:\C#\Adventure\Adventure\Save.txt";
+
         public static void IntroMain()
         {
             string introChoice;
-            string choiceCode;
 
             // Dialog
             Program.Dialog("\"Quiet...\"", "dg");
@@ -59,22 +63,33 @@ namespace Adventure
                 "follow us home. Let's go.", "w");
                 Program.Save("1");
                 Program.Cont();
+                IntroPart2A();
             }
             else
             {
                 Program.Dialog("Forget it, let's just get back home already.", "w");
                 Program.Save("2");
                 Program.Cont();
+                IntroPart2B();
             }
-
-            Program.Save("2");
-            IntroPart2();
         }
 
-        public static void IntroPart2()
+        public static void IntroPart2A()
         {
-            Program.Dialog("Part 2...", "r");
+            Program.Save("2A");
+            Program.Dialog("You come across a Grue and are torn limb from limb", "r");
             Program.Cont();
+            Sheets.DB(Sheets.Scopes);
+            File.WriteAllText(path, String.Empty);
+        }
+
+        public static void IntroPart2B()
+        {
+            Program.Save("2B");
+            Program.Dialog("You find a hidden treasure and never want for anything again.", "g");
+            Program.Cont();
+            Sheets.DB(Sheets.Scopes);
+            File.WriteAllText(path, String.Empty);
         }
     }
 }

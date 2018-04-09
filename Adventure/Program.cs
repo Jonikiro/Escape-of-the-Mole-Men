@@ -23,8 +23,6 @@ namespace Adventure
         // Program game loop
         static void Main()
         {
-            // Sheets.DB(Sheets.Scopes);
-
             // Sets the window title to name of the game.
             Console.Title = "Escape of the Mole Men";
 
@@ -172,11 +170,28 @@ namespace Adventure
                 case "1":
                     Intro.IntroMain();
                     break;
-                case "2":
-                    Intro.IntroPart2();
+                case "2A":
+                    Intro.IntroPart2A();
+                    break;
+                case "2B":
+                    Intro.IntroPart2B();
                     break;
                 default:
                     break;
+            }
+        }
+
+        public static void Read(string path, List<object> list)
+        {
+            string line;
+
+            // Read the file and display it line by line.  
+            using (System.IO.StreamReader file = new System.IO.StreamReader(@path))
+            {
+                while ((line = file.ReadLine()) != null)
+                {
+                    list.Add(line);
+                }
             }
         }
     }
